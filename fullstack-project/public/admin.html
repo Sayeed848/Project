@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — PostgreSQL Management</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="admin-header">
+    <div class="admin-title">
+      <i class="ti ti-database-cog"></i> PostgreSQL Admin Dashboard
+    </div>
+    <div class="admin-nav-links">
+      <a href="index.html">← Portfolio</a>
+      <a href="shop.html">🛍️ ShopZone Store</a>
+      <a href="cv.html">📄 CV Format</a>
+    </div>
+  </header>
+
+  <div class="admin-container">
+    <!-- METRICS -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-icon"><i class="ti ti-box"></i></div>
+        <div>
+          <div class="metric-value" id="stat-products">0</div>
+          <div class="metric-label">Products in Database</div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon"><i class="ti ti-shopping-cart-check"></i></div>
+        <div>
+          <div class="metric-value" id="stat-orders">0</div>
+          <div class="metric-label">Orders Placed</div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon"><i class="ti ti-currency-rupee"></i></div>
+        <div>
+          <div class="metric-value" id="stat-revenue">₹0</div>
+          <div class="metric-label">Total Store Revenue</div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon"><i class="ti ti-mail"></i></div>
+        <div>
+          <div class="metric-value" id="stat-messages">0</div>
+          <div class="metric-label">Contact Messages</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTS MANAGEMENT -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">Store Products Management</div>
+        <button class="btn-add" onclick="openAddProductModal()"><i class="ti ti-plus"></i> Add New Product</button>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Old Price</th>
+            <th>Badge</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="products-table-body">
+          <tr><td colspan="7" style="text-align:center; color:#8c93a4;">Loading products...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CONTACT MESSAGES INBOX -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">Contact Messages Inbox</div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Message</th>
+          </tr>
+        </thead>
+        <tbody id="messages-table-body">
+          <tr><td colspan="5" style="text-align:center; color:#8c93a4;">Loading messages...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ADD PRODUCT MODAL -->
+  <div id="addProductModal" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); align-items:center; justify-content:center;">
+    <div style="background:#181b28; border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:30px; width:min(500px, 90vw);">
+      <h3 style="margin-bottom: 20px; font-size:20px;">Add New Product to PostgreSQL</h3>
+      <form id="addProductForm" onsubmit="submitAddProduct(event)">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:12px;">
+          <div>
+            <label style="font-size:12px; color:#8c93a4;">Product Name *</label>
+            <input type="text" id="p-name" style="width:100%; background:#11131a; border:1px solid rgba(255,255,255,0.1); color:#fff; padding:8px;" required>
+          </div>
+          <div>
+            <label style="font-size:12px; color:#8c93a4;">Category *</label>
+            <select id="p-category" style="width:100%; background:#11131a; border:1px solid rgba(255,255,255,0.1); color:#fff; padding:8px;" required>
+              <option value="fashion">Fashion</option>
+              <option value="electronics">Electronics</option>
+              <option value="home">Home &amp; Living</option>
+              <option value="sports">Sports</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:12px;">
+          <div>
+            <label style="font-size:12px; color:#8c93a4;">Price (₹) *</label>
+            <input type="number" id="p-price" style="width:100%; background:#11131a; border:1px solid rgba(255,255,255,0.1); color:#fff; padding:8px;" required>
+          </div>
+          <div>
+            <label style="font-size:12px; color:#8c93a4;">Old Price (₹)</label>
+            <input type="number" id="p-old-price" style="width:100%; background:#11131a; border:1px solid rgba(255,255,255,0.1); color:#fff; padding:8px;">
+          </div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <label style="font-size:12px; color:#8c93a4;">Image URL</label>
+          <input type="text" id="p-img" placeholder="https://..." style="width:100%; background:#11131a; border:1px solid rgba(255,255,255,0.1); color:#fff; padding:8px;">
+        </div>
+        <div style="display:flex; gap:10px; margin-top:20px;">
+          <button type="submit" class="btn-add" style="flex:1;">Add Product</button>
+          <button type="button" onclick="closeAddProductModal()" style="background:none; border:1px solid rgba(255,255,255,0.1); color:#fff; padding:8px 16px; border-radius:6px; cursor:pointer;">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "fullstack-project",
+  "version": "1.0.0",
+  "description": "Sayeed Alam Portfolio & ShopZone E-Commerce with Node.js, Express & PostgreSQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "postgresql",
+    "ecommerce",
+    "portfolio"
+  ],
+  "author": "Sayeed Alam",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pg": "^8.11.5"
+  }
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopZone — E-Commerce Platform</title>
+  <link rel="stylesheet" href="css/shop.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="shop.html" class="logo">Shop<span>Zone</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">← Developer Portfolio</a></li>
+      <li><a href="#" onclick="filterCategory('all', this)">Home</a></li>
+      <li><a href="#" onclick="filterCategory('fashion', this)">Fashion</a></li>
+      <li><a href="#" onclick="filterCategory('electronics', this)">Electronics</a></li>
+      <li><a href="#" onclick="filterCategory('sports', this)">Sports</a></li>
+    </ul>
+    <div class="nav-icons">
+      <div class="cart-wrap" onclick="toggleCartDrawer()">
+        <i class="ti ti-shopping-bag"></i>
+        <div class="cart-badge" id="cart-count">0</div>
+      </div>
+      <a href="admin.html" title="Admin Dashboard"><i class="ti ti-user-circle"></i></a>
+    </div>
+  </nav>
+
+  <!-- HERO BANNER -->
+  <section class="hero">
+    <div>
+      <div class="section-eyebrow">New Arrivals · Season 2026</div>
+      <h1 class="hero-title">Discover Your<br><em>Signature</em> Style</h1>
+      <p class="hero-desc">Explore thousands of curated products across fashion, electronics, home and sports — powered by Node.js &amp; PostgreSQL.</p>
+      <button class="btn-primary" onclick="document.getElementById('product-grid').scrollIntoView({behavior:'smooth'})">Shop Collection Now</button>
+    </div>
+    <div style="font-size: 100px; color: var(--shop-accent); opacity: 0.8;">
+      <i class="ti ti-shopping-cart-discount"></i>
+    </div>
+  </section>
+
+  <!-- MARQUEE STRIP -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      <span>Free Shipping on ₹999+</span> · 
+      <span>New Arrivals Weekly</span> · 
+      <span>Easy 30-Day Returns</span> · 
+      <span>Flat 30% Off — Code SAVE30</span> · 
+      <span>Powered by Node.js &amp; PostgreSQL</span> · 
+      <span>Free Shipping on ₹999+</span> · 
+      <span>New Arrivals Weekly</span> · 
+      <span>Easy 30-Day Returns</span> · 
+      <span>Flat 30% Off — Code SAVE30</span>
+    </div>
+  </div>
+
+  <!-- PRODUCTS SECTION -->
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">Curated Products</div>
+        <h2 class="section-title">Featured Store Collection</h2>
+      </div>
+    </div>
+
+    <!-- FILTER & SEARCH BAR -->
+    <div class="filter-bar">
+      <div class="filters">
+        <button class="filter-pill active" onclick="filterCategory('all', this)"><i class="ti ti-layout-grid"></i> All</button>
+        <button class="filter-pill" onclick="filterCategory('fashion', this)"><i class="ti ti-shirt"></i> Fashion</button>
+        <button class="filter-pill" onclick="filterCategory('electronics', this)"><i class="ti ti-device-laptop"></i> Electronics</button>
+        <button class="filter-pill" onclick="filterCategory('home', this)"><i class="ti ti-sofa"></i> Home &amp; Living</button>
+        <button class="filter-pill" onclick="filterCategory('sports', this)"><i class="ti ti-run"></i> Sports</button>
+      </div>
+
+      <div class="search-box">
+        <i class="ti ti-search" style="color: var(--shop-muted);"></i>
+        <input type="text" id="searchInput" placeholder="Search products..." oninput="handleSearch()">
+      </div>
+    </div>
+
+    <!-- DYNAMIC PRODUCT GRID -->
+    <div class="products" id="product-grid">
+      <div style="color: var(--shop-muted); grid-column: 1/-1; text-align: center; padding: 40px;">
+        Loading products from PostgreSQL database...
+      </div>
+    </div>
+  </div>
+
+  <!-- CART SLIDE-OVER DRAWER -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>Shopping Cart (<span id="cart-drawer-count">0</span>)</h3>
+      <button onclick="toggleCartDrawer()" style="background:none; border:none; color:#fff; font-size:20px; cursor:pointer;">✕</button>
+    </div>
+    <div class="cart-body" id="cart-items-container">
+      <div style="color: var(--shop-muted); text-align: center; margin-top: 40px;">
+        Your cart is empty.
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div style="margin-bottom: 12px;">
+        <input type="text" id="promoCode" placeholder="Promo Code (SAVE30)" style="width: 100%; background: #181b24; border: 1px solid var(--shop-border); color: #fff; padding: 8px 12px; border-radius: 6px;">
+      </div>
+      <div class="cart-total-row">
+        <span>Subtotal:</span>
+        <span id="cart-total-amount">₹0</span>
+      </div>
+      <button class="btn-primary" style="width: 100%;" onclick="openCheckoutModal()">Proceed to Checkout →</button>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div id="checkoutModal" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); align-items:center; justify-content:center;">
+    <div style="background:#181b24; border:1px solid var(--shop-border); border-radius:16px; padding:30px; width:min(440px, 90vw);">
+      <h3 style="margin-bottom: 20px; font-family:'Cormorant Garamond', serif; font-size:24px;">Complete Order</h3>
+      <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:20px;">
+        <div>
+          <label style="font-size:12px; color:var(--shop-muted);">Full Name *</label>
+          <input type="text" id="cust-name" placeholder="John Doe" style="width:100%; background:#11131c; border:1px solid var(--shop-border); color:#fff; padding:10px; border-radius:6px;" required>
+        </div>
+        <div>
+          <label style="font-size:12px; color:var(--shop-muted);">Email Address *</label>
+          <input type="email" id="cust-email" placeholder="john@example.com" style="width:100%; background:#11131c; border:1px solid var(--shop-border); color:#fff; padding:10px; border-radius:6px;" required>
+        </div>
+        <div>
+          <label style="font-size:12px; color:var(--shop-muted);">Delivery Address</label>
+          <textarea id="cust-address" placeholder="123 Main St..." style="width:100%; background:#11131c; border:1px solid var(--shop-border); color:#fff; padding:10px; border-radius:6px; min-height:80px;"></textarea>
+        </div>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <button class="btn-primary" style="flex:1;" onclick="submitOrder()">Confirm Order</button>
+        <button onclick="closeCheckoutModal()" style="background:none; border:1px solid var(--shop-border); color:#fff; padding:10px 16px; border-radius:6px; cursor:pointer;">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toast">
+    <i class="ti ti-circle-check"></i>
+    <span id="toast-msg">Item added to cart!</span>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>© 2026 ShopZone E-Commerce · Built by Sayeed Alam</div>
+    <div style="margin-top: 6px;">Connected to Node.js &amp; PostgreSQL Backend</div>
+  </footer>
+
+  <script src="js/shop.js"></script>
+</body>
+</html>

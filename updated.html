@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopZone — Discover Your Style</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+<link rel="stylesheet" href="updated.css">
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav class="navbar">
+  <div class="logo">Shop<span>Zone</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Men</a></li>
+    <li><a href="#">Women</a></li>
+    <li><a href="#">Electronics</a></li>
+    <li><a href="#">Sale</a></li>
+  </ul>
+  <div class="nav-icons">
+    <i class="ti ti-search"></i>
+    <i class="ti ti-heart"></i>
+    <div class="cart-wrap">
+      <i class="ti ti-shopping-bag" id="cart-icon"></i>
+      <div class="cart-badge" id="cart-count">0</div>
+    </div>
+    <i class="ti ti-user-circle"></i>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">New Arrivals · Season 2025</div>
+    <h1 class="hero-title">Discover Your<br><em>Signature</em><br>Style</h1>
+    <p class="hero-desc">Explore thousands of curated products across fashion, electronics and lifestyle — crafted for the discerning eye.</p>
+    <div class="hero-btns">
+      <button class="btn-primary">Shop Now</button>
+      <button class="btn-ghost">View Deals</button>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">12K+</div>
+        <div class="stat-lbl">Products</div>
+      </div>
+      <div>
+        <div class="stat-num">4.9★</div>
+        <div class="stat-lbl">Rating</div>
+      </div>
+      <div>
+        <div class="stat-num">48h</div>
+        <div class="stat-lbl">Delivery</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-feature">
+      <div class="feature-badge">Trending</div>
+      <div class="feature-icon-wrap"><i class="ti ti-shirt"></i></div>
+      <div class="feature-label">Fashion</div>
+      <div class="feature-title">Premium<br>Collections</div>
+    </div>
+    <div class="hero-feature">
+      <div class="feature-price-tag">₹1,299</div>
+      <div class="feature-icon-wrap"><i class="ti ti-device-watch"></i></div>
+      <div class="feature-label">Electronics</div>
+      <div class="feature-title">Smart<br>Living</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>Free Shipping on ₹999+</span>
+    <span>New Arrivals Weekly</span>
+    <span>Easy 30-Day Returns</span>
+    <span>Exclusive Member Deals</span>
+    <span>Premium Quality Assured</span>
+    <span>Flat 30% Off — Code SAVE30</span>
+    <span>Free Shipping on ₹999+</span>
+    <span>New Arrivals Weekly</span>
+    <span>Easy 30-Day Returns</span>
+    <span>Exclusive Member Deals</span>
+    <span>Premium Quality Assured</span>
+    <span>Flat 30% Off — Code SAVE30</span>
+  </div>
+</div>
+
+<!-- ── PRODUCTS ── -->
+<div class="section">
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">Curated for You</div>
+      <h2 class="section-title">Featured Products</h2>
+    </div>
+    <a href="#" class="section-link">View All <i class="ti ti-arrow-right"></i></a>
+  </div>
+
+  <div class="filters" id="filters">
+    <button class="filter-pill active" onclick="filter('all', this)"><i class="ti ti-layout-grid"></i>All</button>
+    <button class="filter-pill" onclick="filter('fashion', this)"><i class="ti ti-shirt"></i>Fashion</button>
+    <button class="filter-pill" onclick="filter('electronics', this)"><i class="ti ti-device-laptop"></i>Electronics</button>
+    <button class="filter-pill" onclick="filter('home', this)"><i class="ti ti-sofa"></i>Home & Living</button>
+    <button class="filter-pill" onclick="filter('sports', this)"><i class="ti ti-run"></i>Sports</button>
+  </div>
+
+  <div class="products" id="product-grid"></div>
+</div>
+
+<!-- ── OFFER BANNER ── -->
+<div class="offer-section">
+  <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+  <br><br>
+  <div class="offer-banner">
+    <div>
+      <div class="offer-eyebrow">Limited Time Offer</div>
+      <h3 class="offer-title">Flat <em>30% Off</em><br>on orders above ₹999</h3>
+      <p class="offer-sub">Use code <strong>SAVE30</strong> at checkout &nbsp;·&nbsp; Valid until stocks last</p>
+    </div>
+    <button class="btn-primary" style="white-space:nowrap;padding:16px 40px;font-size:12px;">Grab the Deal</button>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">Shop<span>Zone</span></div>
+  <div class="footer-copy">© 2025 ShopZone · Built by Sayeed Alam</div>
+  <ul class="footer-links">
+    <li><a href="#">Privacy</a></li>
+    <li><a href="#">Terms</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</footer>
+
+<!-- ── TOAST ── -->
+<div class="toast" id="toast">
+  <i class="ti ti-circle-check"></i>
+  <span id="toast-msg">Added to cart!</span>
+</div>
+
+<script>
+const products = [
+  { id:1, name:"Classic White Tee",    cat:"fashion",     price:499,  old:799,  icon:"ti-shirt",         badge:"sale", rating:4 },
+  { id:2, name:"Wireless Earbuds",     cat:"electronics", price:1299, old:2499, icon:"ti-headphones",    badge:"sale", rating:5 },
+  { id:3, name:"Running Shoes",        cat:"sports",      price:1899, old:null, icon:"ti-shoe",          badge:"new",  rating:4 },
+  { id:4, name:"Laptop Stand",         cat:"home",        price:699,  old:999,  icon:"ti-device-laptop", badge:"sale", rating:4 },
+  { id:5, name:"Denim Jacket",         cat:"fashion",     price:1599, old:2199, icon:"ti-shirt",         badge:"",     rating:5 },
+  { id:6, name:"Smart Watch",          cat:"electronics", price:3499, old:4999, icon:"ti-device-watch",  badge:"new",  rating:5 },
+  { id:7, name:"Yoga Mat",             cat:"sports",      price:849,  old:1200, icon:"ti-run",           badge:"",     rating:4 },
+  { id:8, name:"Scented Candle Set",   cat:"home",        price:399,  old:null, icon:"ti-flame",         badge:"new",  rating:4 },
+];
+
+let cart = 0;
+
+function discount(price, old) {
+  if (!old) return '';
+  return Math.round((1 - price / old) * 100) + '% off';
+}
+
+function stars(n) {
+  return '★'.repeat(n) + '☆'.repeat(5 - n);
+}
+
+function render(list) {
+  const g = document.getElementById('product-grid');
+  g.innerHTML = list.map(p => `
+    <div class="card">
+      <div class="card-img">
+        <i class="ti ${p.icon}"></i>
+        ${p.badge ? `<div class="card-badge ${p.badge}">${p.badge}</div>` : ''}
+        <div class="card-wishlist"><i class="ti ti-heart"></i></div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">${p.name}</div>
+        <div class="card-rating">
+          <span class="stars">${stars(p.rating)}</span>
+          <span class="rating-count">${p.rating}.0</span>
+        </div>
+        <div class="card-price-row">
+          <span class="card-price">₹${p.price.toLocaleString()}</span>
+          ${p.old ? `<span class="card-old-price">₹${p.old.toLocaleString()}</span>` : ''}
+          ${p.old ? `<span class="card-discount">${discount(p.price, p.old)}</span>` : ''}
+        </div>
+        <button class="add-to-cart" onclick="addCart('${p.name}')">
+          <i class="ti ti-shopping-bag-plus"></i> Add to Cart
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filter(cat, el) {
+  document.querySelectorAll('.filter-pill').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  render(cat === 'all' ? products : products.filter(p => p.cat === cat));
+}
+
+function addCart(name) {
+  cart++;
+  document.getElementById('cart-count').textContent = cart;
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = name + ' added to bag';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2400);
+}
+
+render(products);
+</script>
+</body>
+</html>
